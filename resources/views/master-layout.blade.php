@@ -5,7 +5,7 @@
 		<title>Dashboard Management Asset | Responsive Bootstrap Tables</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1" name="viewport" />
-		<meta content="Preview page of Metronic Admin Theme #5 for responsive bootstrap table demos" name="description" />
+		<meta content="BTP Managemen Asset" name="description" />
 		<meta content="" name="author" />
 
     @include('include.include-css')

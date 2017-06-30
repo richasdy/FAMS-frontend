@@ -11,11 +11,17 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('tes','LocationController@tableLocation');
+Route::get('/','LoginController@loginPage');
+Route::post('login-action','LoginController@login');
+
+Route::post('tes','LoginController@login');
+Route::get('tes2','LoginController@tokenSession');
+Route::get('tes3','LoginController@logout');
+
 //asset
 Route::get('/asset', 'AssetController@tableAsset');
 Route::get('/create-asset','AssetController@createAsset');

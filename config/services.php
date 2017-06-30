@@ -35,9 +35,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
-    'btp-asset' => [
+    'btp_asset' => [
         'app_key' => '',
-        'client_id' => '',
-        'client_secret'=>'',
+        'client_id' => '4',
+        'client_secret'=>'krrUUmbDtyxGVew2d1qaoAVaBPEZH2tguhRIN06o',
     ],
 ];

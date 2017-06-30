@@ -11,11 +11,12 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
-
+use Session;
 
 class BTPAsset
 {
-    protected $url;
+    protected $urlAPI;
+    protected $urlWEB;
     protected $appKey;
     protected $client;
     /**
@@ -24,26 +25,36 @@ class BTPAsset
     public function __construct(Client $client)
     {
         //$this->url = config('services.tw.base_url');
-        $this->url = 'http://128.199.115.183:8002/api/';
-        $this->appKey = config('services.tw.app_key');
-        $this->clientId = config('services.tw.client_id');
-        $this->clientSecret = config('services.tw.client_secret');
+        $this->urlAPI = 'http://128.199.115.183:8002/api/';
+        $this->urlWEB = 'http://128.199.115.183:8002/';
+        $this->appKey = config('services.btp_asset.app_key');
+        $this->clientId = config('services.btp_asset.client_id');
+        $this->clientSecret = config('services.btp_asset.client_secret');
         $this->client = $client;
     }
 
     public function getAccessToken($username, $password)
     {
         $params = [
+          'grant_type'=>'password',
+          'client_id'=>$this->clientId,
+          'client_secret'=>$this->clientSecret,
           'username' => $username,
           'password' => $password
         ];
-        $tokenResult = $this->post('oauth2/token', $params);
+        $tokenResult = $this->post('oauth/token', $params, false);
+        //$access_token = $tokenResult->result->access_token;
+        //session(['api_token' => $access_token]);
         return $tokenResult;
     }
 
-    private function generateApiUrl($url)
+    private function generateApiUrl($url, $api = true)
     {
-        return $this->url . $url;
+      if($api){
+        return $this->urlAPI . $url;
+      }else{
+        return $this->urlWEB . $url;
+      }
     }
 
     private function proceedException($e, $apiUrl)
@@ -78,8 +89,12 @@ class BTPAsset
         }
     }
 
-    public function post($url, $params = []){
-      $apiUrl = $this->generateApiUrl($url);
+    public function post($url, $params = [], $withToken = true){
+      if(!$withToken){
+        $apiUrl = $this->generateApiUrl($url,false);
+      }else{
+        $apiUrl = $this->generateApiUrl($url);
+      }
       $accessToken = session('api_token');
       $headers = [
           'headers' => [
@@ -98,20 +113,20 @@ class BTPAsset
 
     public function get($url, $params = []){
       $apiUrl = $this->generateApiUrl($url);
-      //$apiUrl = "http://192.168.1.8:8871/api-tourismwave/api/ref/city";
+
       if($params){
         $apiUrl = $apiUrl.'?'.http_build_query($params);
       }
       Log::alert('API URL ==> ' . $apiUrl);
-      $accessToken = session('api_token');
+      $accessToken = Session::get('access_token');
       $headers = [
           'headers' => [
               'Authorization' => 'Bearer ' . $accessToken
           ],
       ];
       try {
-          $request = new Request('GET', $apiUrl, $headers);
-          $response = $this->client->send($request);
+          //$request = new Request('GET', $apiUrl, $headers,'');//dd($request);
+          $response = $this->client->get($apiUrl,$headers);
           $parsedResponse = $this->parseResponse($response);
       } catch (\Exception $e) {
           $parsedResponse = $this->proceedException($e, $apiUrl);
