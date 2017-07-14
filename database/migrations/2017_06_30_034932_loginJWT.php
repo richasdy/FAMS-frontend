@@ -17,8 +17,8 @@ class LoginJWT extends Migration
         if (!Schema::hasTable('loginJWT')) {
           Schema::create('loginJWT', function (Blueprint $table) {
               $table->string('email')->unique();
-              $table->string('access_token');
-              $table->string('refresh_token');
+              $table->mediumText('access_token');
+              $table->mediumText('refresh_token');
               $table->string('status');
               $table->timestamps();
           });

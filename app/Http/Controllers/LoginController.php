@@ -39,7 +39,7 @@ class LoginController extends Controller
           //generate jwt
           $hitAPI = $this->APIAsset->getAccessToken($email,$password);
           if($hitAPI->status==200){
-            $user = $this->storeLogin($email,$hitAPI);
+            $user = $this->storeLogin($email,$hitAPI->result);
           }else{
             //Unauthorized
             return view('login-page.login');
