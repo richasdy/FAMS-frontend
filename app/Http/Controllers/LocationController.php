@@ -20,9 +20,9 @@ class LocationController extends Controller
         $page = $request->page;
       }
       $data = $this->APIAsset->get('index-location?page='.$page);
-      //$ref = $this->APIAsset->get('cu-page-location');
+      $ref = $this->APIAsset->get('cu-page-location');
       //dd($data);
-      return view('location-page.index',['locations'=>$data->result]);
+      return view('location-page.index',['locations'=>$data->result,'ref'=>$ref->result]);
     }
 
     public function createLocation(Request $request){

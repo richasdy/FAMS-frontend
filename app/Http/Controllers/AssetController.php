@@ -35,7 +35,7 @@ class AssetController extends Controller
 
     public function deleteAsset(Request $request){
       $idAsset = $request->id_asset;
-      $request = $this->APIAsset->get('delete-asset/'.$idAsset);dd($request);
+      $request = $this->APIAsset->get('delete-asset/'.$idAsset);
       if($request->status==200){
 
       }

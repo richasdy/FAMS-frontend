@@ -1,5 +1,9 @@
 @extends('master-layout')
 
+@section('tables-menu')
+	active open selected
+@stop
+
 @section('location-index-menu')
 	active
 @stop
@@ -32,6 +36,7 @@
 			                      <tr>
 			                        <th>ID</th>
 			                        <th>Name</th>
+															<th>Gedung</th>
 			                        <th colspan="2">Menu</th>
 			                      </tr>
 			                    </thead>
@@ -40,6 +45,7 @@
 			                        <tr>
 			                          <td>{{$location->id}}</td>
 			                          <td>{{$location->name}}</td>
+																<td>{{$location->gedung->name}}</td>
 			                          <td><i class="glyphicon glyphicon-pencil"></i></td>
 			                          <td><a class="delete" data-toggle="modal" data-target="#deleteLocation" data-id="{{$location->id}}">
 																	<i class="glyphicon glyphicon-trash"></i>
@@ -95,7 +101,14 @@
 			                     <label for="">Name</label>
 			                     <input type="text" class="form-control" name="name">
 			                   </div>
-
+												 <div class="form-group">
+			                     <label for="">Gedung</label>
+			                     <select name="id_gedung" class="form-control">
+														 @foreach($ref->gedung as $gedung)
+			                       <option value="{{$gedung->id}}">{{$gedung->name}}</option>
+														 @endforeach
+			                      </select>
+			                   </div>
 			                   <button type="submit" class="btn btn-default">Submit</button>
 			                  </form>
 			                </div>

@@ -25,8 +25,8 @@ class BTPAsset
     public function __construct(Client $client)
     {
         //$this->url = config('services.tw.base_url');
-        $this->urlAPI = 'http://128.199.115.183:8002/api/';
-        $this->urlWEB = 'http://128.199.115.183:8002/';
+        $this->urlAPI = config('services.btp_asset.url_api');
+        $this->urlWEB = config('services.btp_asset.url_web');
         $this->appKey = config('services.btp_asset.app_key');
         $this->clientId = config('services.btp_asset.client_id');
         $this->clientSecret = config('services.btp_asset.client_secret');

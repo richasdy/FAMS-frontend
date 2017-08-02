@@ -46,8 +46,11 @@ class LoginController extends Controller
           }
         }
         $token = $user->access_token;
+        //simpan token+username di session
         Session::put("access_token", $token);
-        return redirect()->action('AssetController@tableAsset');
+        $username = $this->extractToken();
+        Session::put("username", $username);
+        return redirect()->action('DashboardController@home');
     }
 
     public function isLogin($email){
@@ -71,15 +74,14 @@ class LoginController extends Controller
 
     public function logout(){
       Session::forget('access_token');
+      return view('login-page.login');
     }
 
-    // public function token(){
-    //   $token = $this->APIAsset->getAccessToken('asset@btp.or.id','btpasset');
-    //   $this->request->session()->put('api_token', $token);
-    //   //var_dump($this->APIAsset->getAccessToken('asset@btp.or.id','btpasset'));
-    //   dd($token);
-    // }
-    //
+    public function extractToken(){
+      $result = $this->APIAsset->get('user');
+      return $result->result->name;
+    }
+
     public function tokenSession(){
       dd(Session::get('access_token'));
     }

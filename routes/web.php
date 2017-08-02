@@ -17,15 +17,26 @@ Route::get('/welcome', function () {
 
 Route::get('/','LoginController@loginPage');
 Route::post('login-action','LoginController@login');
+Route::get('logout','LoginController@logout');
 
-Route::post('tes','LoginController@login');
+Route::get('tes','LoginController@extractToken');
 Route::get('tes2','LoginController@tokenSession');
-Route::get('tes3','LoginController@logout');
+
+//search
+Route::get('/search','SearchController@search');
+
+//dashboard
+Route::get('/home', 'DashboardController@home');
 
 //asset
 Route::get('/asset', 'AssetController@tableAsset');
 Route::get('/create-asset','AssetController@createAsset');
 Route::get('/delete-asset','AssetController@deleteAsset');
+
+//Gedung
+Route::get('/gedung', 'GedungController@tableGedung');
+Route::get('/create-gedung','GedungController@createGedung');
+Route::get('/delete-gedung','GedungController@deleteGedung');
 
 //location
 Route::get('/location', 'LocationController@tableLocation');

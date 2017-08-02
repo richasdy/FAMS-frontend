@@ -1,5 +1,9 @@
 @extends('master-layout')
 
+@section('tables-menu')
+	active open selected
+@stop
+
 @section('type-index-menu')
 	active
 @stop

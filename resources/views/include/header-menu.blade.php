@@ -24,7 +24,7 @@
 					</form>
 
 					<div class="topbar-actions">
-
+						<!--
 						<div class="btn-group-notification btn-group" id="header_notification_bar">
 								<button type="button" class="btn btn-sm md-skip dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 										<i class="icon-bell"></i>
@@ -36,14 +36,19 @@
 								<button type="button" class="btn btn-sm md-skip dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 										<i class="fa fa-plus"></i>
 								</button>
-						</div>
+						</div> -->
 
 						<div class="btn-group-img btn-group">
 								<button type="button" class="btn btn-sm md-skip dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-										<span>Hi, Marcus</span>
+										<span>Hi, {{ Session::get('username')}}</span>
 										<img src="dashboard_themes/assets/layouts/layout5/img/avatar1.jpg" alt="">
 								</button>
 						</div>
+						<a href='{{url("logout")}}'>
+							<button type="button" class="quick-sidebar-toggler md-skip">
+									<i class="icon-logout"></i>
+							</button>
+						</a>
 
 					</div>
 
@@ -51,30 +56,20 @@
 
 				<div class="nav-collapse collapse navbar-collapse navbar-responsive-collapse">
 						<ul class="nav navbar-nav">
-								<li class="dropdown dropdown-fw dropdown-fw-disabled">
-										<a href="javascript:;" class="text-uppercase">
+								<li class="dropdown dropdown-fw dropdown-fw-disabled @yield('dashboard-menu')">
+										<a href="{{url('home')}}" class="text-uppercase">
 												<i class="icon-home"></i> Dashboard
 										</a>
 										<ul class="dropdown-menu dropdown-menu-fw">
-												<li class="active">
-													<a href="javascript:;">
-														<i class="icon-bar-chart"></i> Home
-													</a>
-												</li>
-												<li>
-													<a href="javascript:;">
-														<i class="icon-bulb"></i> Home 2
-													</a>
-												</li>
-												<li>
-													<a href="javascript:;">
-														<i class="icon-graph"></i> Home 3
-													</a>
-												</li>
+											<li class="@yield('dashboard-home-menu')">
+												<a href="{{url('home')}}">
+													<i class="icon-home"></i> Home
+												</a>
+											</li>
 										</ul>
 								</li>
-								<li class="dropdown dropdown-fw dropdown-fw-disabled active open selected">
-										<a href="javascript:;" class="text-uppercase">
+								<li class="dropdown dropdown-fw dropdown-fw-disabled @yield('tables-menu')">
+										<a href="{{url('asset')}}" class="text-uppercase">
 											<i class="icon-briefcase"></i> TABLES
 										</a>
 										<ul class="dropdown-menu dropdown-menu-fw">
@@ -83,10 +78,17 @@
 														<i class="fa fa-archive"></i> Asset
 													</a>
 												</li>
-												<li class="@yield('location-index-menu')">
-													<a href="{{url('location')}}">
+												<li class="dropdown more-dropdown-sub @yield('location-index-menu')">
+													<a href="{{url('gedung')}}">
 														<i class="icon-pointer"></i> Location
 													</a>
+													<ul class="dropdown-menu">
+														<li class="@yield('type-detail-index-menu')">
+															<a href="{{url('location')}}">
+																<i class="icon-home"></i> Location Detail
+															</a>
+														</li>
+													</ul>
 												</li>
 												<li class="dropdown more-dropdown-sub @yield('type-index-menu')">
 													<a href="{{url('type')}}">
@@ -102,6 +104,7 @@
 												</li>
 										</ul>
 								</li>
+								<!-- Menu lain
 								<li class="dropdown dropdown-fw dropdown-fw-disabled  ">
 										<a href="javascript:;" class="text-uppercase">
 												<i class="icon-layers"></i> Pages </a>
@@ -310,6 +313,7 @@
 												</li>
 										</ul>
 								</li>
+								-->
 						</ul>
 				</div>
 
