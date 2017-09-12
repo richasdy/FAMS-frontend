@@ -44,7 +44,9 @@
 			                        <tr>
 			                          <td>{{$gdg->id}}</td>
 			                          <td>{{$gdg->name}}</td>
-			                          <td><i class="glyphicon glyphicon-pencil"></i></td>
+			                          <td><a class="update" data-toggle="modal" data-target="#updateLocation" data-id="{{$gdg->id}}" data-name="{{$gdg->name}}">
+																	<i class="glyphicon glyphicon-pencil"></i>
+																</a></td>
 			                          <td><a class="delete" data-toggle="modal" data-target="#deleteLocation" data-id="{{$gdg->id}}">
 																	<i class="glyphicon glyphicon-trash"></i>
 																</a></td>
@@ -135,6 +137,34 @@
 								  </div>
 								</div>
 								<!--Modal Delete End-->
+
+								<!--Modal Delete Begin-->
+								<div id="updateLocation" class="modal fade" role="dialog">
+								  <div class="modal-dialog">
+
+								    <!-- Modal content-->
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <button type="button" class="close" data-dismiss="modal">&times;</button>
+								        <h4 class="modal-title">Update Gedung</h4>
+								      </div>
+											<form action="{{url('update-gedung')}}" method="GET">
+								      <div class="modal-body">
+												<input type="hidden" name="id_gedung" id="id" value="">
+												<div class="form-group">
+													<label for="">Name</label>
+													<input type="text" class="form-control" name="name" id="name" value="">
+												</div>
+								      </div>
+								      <div class="modal-footer">
+								        <button type="submit" class="btn btn-danger">Ya</button>
+								      </div>
+											</form>
+								    </div>
+
+								  </div>
+								</div>
+								<!--Modal Delete End-->
 			      </div>
 
 			  </div>
@@ -159,6 +189,15 @@ $(document).ready(function(){
 		//console.log(id);
 		$('.modal-body #detail').text("Anda akan menghapus gedung : "+id+" . Yakin?");
 		$('.modal-body #id').attr('value',id);
+	});
+
+	//fungsi modal update
+	$(document).on("update", ".delete", function () {
+		var id = $(this).data('id');
+		var name = $(this).data('name');
+		console.log(name);
+		$('.modal-body #id').attr('value',id);
+		$('.modal-body .form-group #name').attr('value',name);
 	});
 
 });

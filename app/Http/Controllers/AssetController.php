@@ -21,8 +21,8 @@ class AssetController extends Controller
       }
       $data = $this->APIAsset->get('index-asset?page='.$page);
       $ref = $this->APIAsset->get('cu-page-asset');
-
-      return view('asset-page.index',['assets'=>$data->result , 'ref'=>$ref->result]);
+      //dd($data);
+      return view('asset-page.index',['assets'=>$data->result->data , 'ref'=>$ref->result]);
     }
 
     public function createAsset(Request $request){
@@ -36,6 +36,7 @@ class AssetController extends Controller
     public function deleteAsset(Request $request){
       $idAsset = $request->id_asset;
       $request = $this->APIAsset->get('delete-asset/'.$idAsset);
+      //dd($request);
       if($request->status==200){
 
       }

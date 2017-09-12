@@ -16,7 +16,7 @@ class DashboardController extends Controller
 
     public function home(){
       $raw_data = $this->APIAsset->get('asset-simple-counter');
-      $data = $raw_data->result;
+      $data = $raw_data->result->data;
       //dd($data);
       //cari jumlah asset per gedung
       return view('dashboard-page.home',['data'=>$data]);
