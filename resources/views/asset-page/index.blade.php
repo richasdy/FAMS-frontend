@@ -37,6 +37,8 @@
 			                        <th>ID</th>
 			                        <th>Origin</th>
 			                        <th>Year</th>
+															<th>Merk</th>
+															<th>Gambar</th>
 			                        <th>Location</th>
 			                        <th>Type</th>
 			                        <th>Order</th>
@@ -49,6 +51,8 @@
 			                          <td>{{$asset->id}}</td>
 			                          <td>{{$asset->origin}}</td>
 			                          <td>{{$asset->year}}</td>
+																<td>{{$asset->merk}}</td>
+																<td><img width="160" height="160" src="data:image/*;charset=utf-8;base64,{{$asset->image}}" alt="image-asset"/></td>
 			                          <td>{{$asset->location}}</td>
 			                          <td>{{$asset->type}}</td>
 			                          <td>{{$asset->order}}</td>
