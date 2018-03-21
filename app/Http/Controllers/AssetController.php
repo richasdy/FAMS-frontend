@@ -21,7 +21,7 @@ class AssetController extends Controller
       }
       $data = $this->APIAsset->get('index-asset?page='.$page);
       $ref = $this->APIAsset->get('cu-page-asset');
-      //dd($data);
+      // dd($data);
       return view('asset-page.index',['assets'=>$data->result->data , 'ref'=>$ref->result]);
     }
 

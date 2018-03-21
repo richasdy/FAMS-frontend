@@ -79,6 +79,7 @@ class LoginController extends Controller
 
     public function extractToken(){
       $result = $this->APIAsset->get('user');
+      // dd($result);
       return $result->result->name;
     }
 

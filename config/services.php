@@ -36,7 +36,7 @@ return [
     ],
 
     'btp_asset' => [
-        'url_api'      => env('BTPASSET_URL_API','http://128.199.115.183:8002/api/'),
+        'url_api'      => env('BTPASSET_URL_API','http://api.asset.technopark.or.id/api/'),
         'url_web'      => env('BTPASSET_URL_WEB','http://128.199.115.183:8002/'),
         'app_key'      => '',
         'client_id'    => env('BTPASSET_CLIENT_ID',4),
